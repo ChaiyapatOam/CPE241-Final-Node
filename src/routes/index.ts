@@ -1,9 +1,12 @@
-import express, { Express, Router } from "express";
+import express, { Router } from "express";
 import { userRoute } from "./user.route";
+import { analyticsRoute } from "./analytic";
+import { bookingRoute } from "./booking.route";
 
 const router: Router = express.Router();
 
-const api = process.env.apiVersion || "/api";
-router.use(`${api}/users`, userRoute);
-
+router.use("/api/customer", userRoute);
+router.use("/api/analytics", analyticsRoute);
+// router.use("/api/employee", userRoute);
+router.use("/api/booking", bookingRoute);
 export const indexRouter: Router = router;
