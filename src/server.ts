@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import helmet from "helmet";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 import cors from "cors";
 
 import { indexRouter } from "@/routes";

@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+export const CreatePromotionSchema = z.object({
+  body: z.object({
+    id: z.number().optional(),
+    code: z.string(),
+    discount_percent: z.number(),
+    amount: z.number(),
+    start_date: z.date(),
+    expired_date: z.date(),
+    roomtype_id: z.array(z.number()),
+  }),
+});
+
 export const PromotionSchema = z.object({
   body: z.object({
     id: z.number().optional(),
@@ -8,11 +20,14 @@ export const PromotionSchema = z.object({
     amount: z.number(),
     start_date: z.date(),
     expired_date: z.date(),
-    room_type_id: z.number(),
+    roomtype_id: z.array(z.number()),
   }),
 });
 
-export type TCreatePromotion = Omit<typeof PromotionSchema._type.body, "id">;
+export type TCreatePromotion = Omit<
+  typeof CreatePromotionSchema._type.body,
+  "id"
+>;
 export type TPromotion = typeof PromotionSchema._type.body;
 
 // export interface Promotion {

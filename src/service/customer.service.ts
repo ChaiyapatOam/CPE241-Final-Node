@@ -1,14 +1,18 @@
 import { connection } from "@/db";
 import { TCreateCustomer, TCustomer } from "@/domain/customer";
-import { RowDataPacket } from "mysql2";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 export class CustomerService {
-  public static async Create(data: TCreateCustomer) {
+  public static async Create(data: TCreateCustomer): Promise<TCustomer> {
     try {
-      const query = await connection.query("INSERT INTO customer SET ?", data);
-      return query;
+      const [result] = await connection.query<ResultSetHeader>(
+        "INSERT INTO customer SET ?",
+        data
+      );
+      return { ...data, id: [result][0].insertId };
     } catch (err) {
       console.log(err);
+      return {} as TCustomer;
     }
   }
 

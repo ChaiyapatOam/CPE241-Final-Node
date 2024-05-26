@@ -1,10 +1,10 @@
-import { BookingService } from "@/service/booking.service";
+import { RoomServiceService } from "@/service/service.service";
 import { Request, Response } from "express";
 
-export class BookingController {
-  public static async Booking(req: Request, res: Response) {
+export class ServiceController {
+  public static async Create(req: Request, res: Response) {
     try {
-      const data = await BookingService.Create(req.body);
+      const data = await RoomServiceService.Create(req.body);
 
       res.status(200).send({ success: true, data: data });
     } catch (error) {
@@ -12,9 +12,9 @@ export class BookingController {
       res.status(500).send({ success: false });
     }
   }
-  public static async GetAllBooking(req: Request, res: Response) {
+  public static async GetAll(req: Request, res: Response) {
     try {
-      const data = await BookingService.Get();
+      const data = await RoomServiceService.Get();
 
       res.status(200).send({ success: true, data: data });
     } catch (error) {

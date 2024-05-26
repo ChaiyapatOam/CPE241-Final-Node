@@ -17,7 +17,7 @@ export class AnalyticService {
   public static async RoomTypeByDate() {
     const [results] = await connection.query(
       `
-      SELECT roomtype.id,SUM(booking.guest_number) as guest_num
+      SELECT roomtype.name,SUM(booking.guest_number) as guest_num
       FROM booking,room,roomtype
       WHERE booking.room_id = room.id
       AND room.id = roomtype.id
@@ -47,7 +47,7 @@ export class AnalyticService {
   public static async MostSellProduct() {
     const [results] = await connection.query(
       `
-      SELECT roomtype.id,booking_product.product_id,SUM(booking_product.quantity) as sum FROM booking_product,booking,room,roomtype
+      SELECT roomtype.name,booking_product.product_id,SUM(booking_product.quantity) as sum FROM booking_product,booking,room,roomtype
       WHERE booking_product.booking_id = booking.id
       AND booking.room_id = room.id
       AND room.id = roomtype.id

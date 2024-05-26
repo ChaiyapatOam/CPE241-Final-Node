@@ -14,12 +14,12 @@ export class EmployeeService {
   public static async Get() {
     try {
       const [results] = await connection.query("SELECT * FROM employee");
-      return [results];
+      return results;
     } catch (err) {
       console.log(err);
     }
   }
-  
+
   public static async GetById(id: number) {
     try {
       const [results] = await connection.query(
@@ -34,7 +34,7 @@ export class EmployeeService {
 
   public static async Update(data: TEmployee) {
     try {
-      const query = await connection.query("UPDATE room SET ?", data);
+      const query = await connection.query("UPDATE employee SET ?", data);
       return query;
     } catch (err) {
       console.log(err);
